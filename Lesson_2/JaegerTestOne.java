@@ -5,12 +5,10 @@ public class JaegerTestOne {
     public static void main(String[] args) {
 
     JaegerOne jaegerOne = new JaegerOne("Gipsy Avenger", "Mark-6", "USA", 85.7f,
-    1500.8f, 3, 10, 12, "Stun Core 08", "Incinerator turbines",
-    "Sluggernaut");
+    1500.8f, 3, 10, 12, "Stun Core 08", "Incinerator turbines", "Sluggernaut");
 
     JaegerOne jaegerTwo = new JaegerOne("Obsidian Fury", "Mark-5", "Australia", 87.5f,
-    2100.4f, 4, 8, 14, "Arc-9 reactor", "Dual Plasma Chainsaws",
-    "Palm grip backlasht");
+    2100.4f, 4, 8, 14, "Arc-9 reactor", "Dual Plasma Chainsaws", "Palm grip backlasht");
 
     jaegerOne.drift();
     jaegerOne.move();
