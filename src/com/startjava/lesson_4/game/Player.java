@@ -24,7 +24,7 @@ public class Player {
     }
 
     public void arr(int index) {
-        int[] numbers1 = Arrays.copyOf(numbers, index+1);
+        int[] numbers1 = Arrays.copyOf(numbers, index + 1);
 
         for (int num : numbers1) {
             System.out.print(num + " ");

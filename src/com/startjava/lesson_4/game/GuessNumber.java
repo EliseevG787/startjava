@@ -27,8 +27,7 @@ public class GuessNumber {
             } else if (playerOne.getNumber(index) > randomNumber) {
                 System.out.println("Введенное вами число больше того, что загадал компьютер");
             } else {
-                System.out.println("Игрок " + playerOne.getName() + " угадал число " +
-                        playerOne.getNumber(index) + " с " + (index + 1) + " попытки");
+                System.out.println("Игрок " + playerOne.getName() + " угадал число " + " с " + (index + 1) + " попытки");
                 break;
             }
             if (index == 9) {
@@ -43,8 +42,7 @@ public class GuessNumber {
             } else if (playerTwo.getNumber(index) > randomNumber) {
                 System.out.println("Введенное вами число больше того, что загадал компьютер");
             } else {
-                System.out.println("Игрок " + playerTwo.getName() + " угадал число " +
-                        " с " + (index + 1) + " попытки");
+                System.out.println("Игрок " + playerTwo.getName() + " угадал число " + " с " + (index + 1) + " попытки");
                 break;
             }
             if (index == 9) {
@@ -58,9 +56,12 @@ public class GuessNumber {
         if (index == 10) {
             playerOne.arrZeroing(index);
             playerTwo.arrZeroing(index);
-        } else {
+        } else if (playerTwo.getNumber(index) == randomNumber) {
             playerOne.arrZeroing(index + 1);
             playerTwo.arrZeroing(index + 1);
+        } else {
+            playerOne.arrZeroing(index + 1);
+            playerTwo.arrZeroing(index);
         }
     }
 }
