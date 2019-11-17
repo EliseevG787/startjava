@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class GuessNumber {
 
-    int index;
-    int number;
+    Scanner scan = new Scanner(System.in);
+    int attempt;
     int randomNumber;
     private Player playerOne;
     private Player playerTwo;
@@ -16,74 +16,79 @@ public class GuessNumber {
     }
 
     public void play() {
-        generateRandomNumber();
+        startGame();
         do {
-            numberInput(playerOne);
-            if (compareOfNumbers(playerOne)) {
+            inputNumber(playerOne);
+            if (compareNumbers(playerOne)) {
                 break;
             }
 
-            numberInput(playerTwo);
-            if (compareOfNumbers(playerTwo)) {
+            inputNumber(playerTwo);
+            if (compareNumbers(playerTwo)) {
                 break;
             }
-            index++;
-        } while (index < 10);
+            attempt++;
+        } while (attempt < 10);
 
-        if (index == 10) {
-            numberOutput(playerOne);
-            numberOutput(playerTwo);
-        }
-
-        setInitialValues();
+        showEnteredNumbers();
+        initNumbers();
     }
 
-    public void generateRandomNumber() {
+    private void startGame() {
         System.out.println("У вас 10 попыток");
         randomNumber = (int) (Math.random() * 101);
         System.out.println("randomNumber: " + randomNumber);
-        index = 0;
+        attempt = 0;
     }
 
-    public void numberInput(Player player) {
+    private void inputNumber(Player player) {
         System.out.println(player.getName() + ", введите число");
-        Scanner scan = new Scanner(System.in);
-        number = scan.nextInt();
-        player.setNumber(index, number);
+        player.setNumber(attempt, scan.nextInt());
     }
 
-    public boolean compareOfNumbers(Player player) {
-        if (player.getNumber(index) < randomNumber) {
+    private boolean compareNumbers(Player player) {
+        if (player.getNumber(attempt) < randomNumber) {
             System.out.println("Введенное вами число меньше того, что загадал компьютер");
-        } else if (player.getNumber(index) > randomNumber) {
+        } else if (player.getNumber(attempt) > randomNumber) {
             System.out.println("Введенное вами число больше того, что загадал компьютер");
         } else {
-            System.out.println("Игрок " + player.getName() + " угадал число " + " с " + (index + 1) + " попытки");
+            System.out.println("Игрок " + player.getName() + " угадал число " + " с " + (attempt + 1) + " попытки");
             return true;
-        }
-        if (index == 9) {
-            System.out.println("У " + player.getName() + " закончились попытки");
         }
         return false;
     }
 
-    public void numberOutput(Player player) {
-        for (int num : player.getNumbers(index)) {
+    private void showAttempts(Player player, int attempt) {
+        for (int num : player.getNumbers(attempt)) {
             System.out.print(num + " ");
         }
         System.out.println();
     }
 
-    public void setInitialValues() {
-        if (index == 10) {
-            playerOne.setInitialValues(index);
-            playerTwo.setInitialValues(index);
-        } else if (playerTwo.getNumber(index) == randomNumber) {
-            playerOne.setInitialValues(index + 1);
-            playerTwo.setInitialValues(index + 1);
+    private void showEnteredNumbers() {
+        if (attempt == 10) {
+            System.out.println("У " + playerOne.getName() + " и " + playerTwo.getName() + " закончились попытки");
+            showAttempts(playerOne, attempt);
+            showAttempts(playerTwo, attempt);
+        } else if (playerTwo.getNumber(attempt) == randomNumber) {
+            showAttempts(playerOne, attempt + 1);
+            showAttempts(playerTwo, attempt + 1);
         } else {
-            playerOne.setInitialValues(index + 1);
-            playerTwo.setInitialValues(index);
+            showAttempts(playerOne, attempt + 1);
+            showAttempts(playerTwo, attempt);
+        }
+    }
+
+    private void initNumbers() {
+        if (attempt == 10) {
+            playerOne.initNumbers(attempt);
+            playerTwo.initNumbers(attempt);
+        } else if (playerTwo.getNumber(attempt) == randomNumber) {
+            playerOne.initNumbers(attempt + 1);
+            playerTwo.initNumbers(attempt + 1);
+        } else {
+            playerOne.initNumbers(attempt + 1);
+            playerTwo.initNumbers(attempt);
         }
     }
 }

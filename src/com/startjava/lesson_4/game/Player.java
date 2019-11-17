@@ -27,7 +27,7 @@ public class Player {
         return Arrays.copyOf(numbers, index);
     }
 
-    public void setInitialValues(int index) {
+    public void initNumbers(int index) {
         Arrays.fill(numbers, 0, index, -1);
     }
 }
