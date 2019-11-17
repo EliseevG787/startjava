@@ -19,6 +19,7 @@ public class Calculator {
     }
 
     public void calculate() {
+
         switch (sign) {
             case "+":
                 System.out.println(Math.addExact(firstNumber, secondNumber));
