@@ -8,7 +8,7 @@ public class Player {
     private int[] numbers = new int[10];
 
     public Player(String name) {
-        initNumbers(10);
+        initNumbers(numbers.length);
         this.name = name;
     }
 
