@@ -4,9 +4,9 @@ import java.util.Scanner;
 
 public class GuessNumber {
 
-    Scanner scan = new Scanner(System.in);
-    int attempt;
-    int randomNumber;
+    private Scanner scan = new Scanner(System.in);
+    private int attempt;
+    private int randomNumber;
     private Player playerOne;
     private Player playerTwo;
 
@@ -16,37 +16,32 @@ public class GuessNumber {
     }
 
     public void play() {
-        startGame();
+        setUp();
         do {
-            inputNumber(playerOne);
-            if (compareNumbers(playerOne)) {
+            if (makeMove(playerOne)) {
                 break;
             }
 
-            inputNumber(playerTwo);
-            if (compareNumbers(playerTwo)) {
+            if (makeMove(playerTwo)) {
                 break;
             }
             attempt++;
         } while (attempt < 10);
 
         showEnteredNumbers();
-        initNumbers();
     }
 
-    private void startGame() {
+    private void setUp() {
+        initCondition();
         System.out.println("У вас 10 попыток");
         randomNumber = (int) (Math.random() * 101);
         System.out.println("randomNumber: " + randomNumber);
         attempt = 0;
     }
 
-    private void inputNumber(Player player) {
+    private boolean makeMove(Player player) {
         System.out.println(player.getName() + ", введите число");
         player.setNumber(attempt, scan.nextInt());
-    }
-
-    private boolean compareNumbers(Player player) {
         if (player.getNumber(attempt) < randomNumber) {
             System.out.println("Введенное вами число меньше того, что загадал компьютер");
         } else if (player.getNumber(attempt) > randomNumber) {
@@ -79,7 +74,7 @@ public class GuessNumber {
         }
     }
 
-    private void initNumbers() {
+    private void initCondition() {
         if (attempt == 10) {
             playerOne.initNumbers(attempt);
             playerTwo.initNumbers(attempt);
