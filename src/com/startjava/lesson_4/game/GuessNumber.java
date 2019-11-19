@@ -31,6 +31,14 @@ public class GuessNumber {
         showEnteredNumbers();
     }
 
+    private void setUp() {
+        initCondition();
+        System.out.println("У вас 10 попыток");
+        randomNumber = (int) (Math.random() * 101);
+        System.out.println("randomNumber: " + randomNumber);
+        attempt = 0;
+    }
+
     private void initCondition() {
         if (attempt == 10) {
             playerOne.initNumbers(attempt);
@@ -44,12 +52,12 @@ public class GuessNumber {
         }
     }
 
-    private void setUp() {
-        initCondition();
-        System.out.println("У вас 10 попыток");
-        randomNumber = (int) (Math.random() * 101);
-        System.out.println("randomNumber: " + randomNumber);
-        attempt = 0;
+    private boolean makeMove(Player player) {
+        inputNumber(player);
+        if (compareNumbers(player)) {
+            return true;
+        }
+        return false;
     }
 
     private void inputNumber(Player player) {
@@ -69,21 +77,6 @@ public class GuessNumber {
         return false;
     }
 
-    private boolean makeMove(Player player) {
-        inputNumber(player);
-        if (compareNumbers(player)) {
-            return true;
-        }
-        return false;
-    }
-
-    private void showAttempts(Player player, int attempt) {
-        for (int num : player.getNumbers(attempt)) {
-            System.out.print(num + " ");
-        }
-        System.out.println();
-    }
-
     private void showEnteredNumbers() {
         if (attempt == 10) {
             System.out.println("У " + playerOne.getName() + " и " + playerTwo.getName() + " закончились попытки");
@@ -96,6 +89,13 @@ public class GuessNumber {
             showAttempts(playerOne, attempt + 1);
             showAttempts(playerTwo, attempt);
         }
+    }
+
+    private void showAttempts(Player player, int attempt) {
+        for (int num : player.getNumbers(attempt)) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
     }
 }
 
