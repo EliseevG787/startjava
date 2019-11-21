@@ -97,6 +97,5 @@ public class GuessNumber {
         }
         System.out.println();
     }
-	
 }
 
